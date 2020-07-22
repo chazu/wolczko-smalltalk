@@ -1,0 +1,44 @@
+187,188d186
+< /*jmc 7/12/1991 */
+< extern void tracewrites();
+603,605c601
+< /* jmc 7/19/91 */
+< 	if(Ptrs) trace('c',oop,Size);
+< 	   else  trace('n',oop,Size);
+---
+> 	trace('c',oop,Size);
+762c758
+< /*jmc 7/12/1991 */
+---
+> 
+768c764
+< 	tracewrites(oop,offset,val);
+---
+> 	trace('w',oop,offset);
+772,793d767
+< void tracewrites(oop,offset,val)
+< OOP oop;
+< WORD offset;
+< OOP val;
+< {
+<         char type= 'w';
+<         extern char *trace_opts, *index();
+< 
+<         if (class(oop)==CLASS_METH_CTX) {
+<                 type= toupper(type);
+<         }
+<  	if (index(trace_opts, type) == NULL)
+<                 return;
+< 
+<         (void)putchar(type);
+<         (void)putw((int)oop, stdout);
+<         (void)putw((int)offset, stdout);
+<         (void)putw((int)val, stdout);
+< }
+< /*jmc 7/12/1991 */
+< 
+< 
+826d799
+< if(type != 'n'  ){  /* let 'n' bypass;a hack;jmc 9/4/91 */
+833d805
+< }  /* let 'n' bypass ;a hack ; jmc 9/4/91*/

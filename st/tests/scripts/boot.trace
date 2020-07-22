@@ -1,0 +1,44 @@
+First event to occur at bc=77999
+156808 words in the object space
+st80: Loading object space...done.
+Object table begins at offset 628224
+st80: Loading object table...done.
+st80: Loading bitmaps: done.
+st80: Linking free chain...done.
+47144 free pointers
+Snapshot loaded.
+strange BitBlt: oop=00004b43 w=0, h=13, bc_count=1876849
+strange BitBlt: oop=00004be2 w=0, h=13, bc_count=3015327
+strange BitBlt: oop=00004c4b w=0, h=13, bc_count=3174714
+strange BitBlt: oop=00004bdf w=0, h=13, bc_count=3775172
+strange BitBlt: oop=0000492d w=0, h=13, bc_count=3957685
+strange BitBlt: oop=00004ba3 w=0, h=13, bc_count=4052727
+strange BitBlt: oop=00004bde w=0, h=13, bc_count=4545697
+strange BitBlt: oop=000049ed w=0, h=13, bc_count=6026381
+strange BitBlt: oop=000049ba w=0, h=13, bc_count=6043159
+strange BitBlt: oop=000037e2 w=0, h=13, bc_count=7015475
+strange BitBlt: oop=00003679 w=0, h=13, bc_count=7030008
+strange BitBlt: oop=00004fab w=0, h=13, bc_count=7478504
+strange BitBlt: oop=00004fa8 w=0, h=13, bc_count=7498147
+strange BitBlt: oop=00004fd7 w=0, h=13, bc_count=7677519
+strange BitBlt: oop=00004fdc w=0, h=13, bc_count=7691959
+st80: script file finished, appending @ bytecode 10303999
+Snapshot invoked after 10440240 bytecodes executed
+collecting garbage, 345761 words free
+marking from 0009
+marking from 0850
+st80: rectifying counts @ bytecode 10440240
+collection complete, 369829 words left
+st80: compacting @ bytecode 10440240
+st80: Phase 1 complete @ bytecode 10440240
+st80: Phase 2 complete @ bytecode 10440240
+compaction complete, 369829 words left
+st80: Writing snapshot...154459 words in the object space
+Object table has 21178 entries
+bitmaps begin at offset 914988
+bitmaps end at offset 925558
+object table begins at offset 618496
+images/xerox.image renamed to images/xerox.image.bak, new images/xerox.image created
+Snapshot written.
+Yet another Smalltalk session comes to a successful conclusion ...
+st80: Exiting @ bytecode 10440251

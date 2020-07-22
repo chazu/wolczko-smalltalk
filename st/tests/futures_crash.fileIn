@@ -1,0 +1,15 @@
+'From Smalltalk-80, Version 2.3 of 13 June 1988 on 11 September 1991 at 8:12:54 am'!
+
+!BinaryIntegration class methodsFor: 'examples'!
+
+example3
+	"Illustrating the use of BinaryIntegration. Calculates the area under
+	 the curve given by the function, using a linear recursive sub-division
+	 algorithm. "
+
+	| integration |
+	integration _ BinaryIntegration function: [:x| (3.0*x*x*x) + (2.0*x*x) + 5.0].
+	Transcript cr; show: (integration linearAreaBetween: 0 and: 5) printString.
+
+	"BinaryIntegration example3."! !
+

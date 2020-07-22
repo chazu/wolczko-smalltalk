@@ -1,0 +1,52 @@
+156808 words in the object space
+st80: Loading object space...done.
+Object table begins at offset 628224
+st80: Loading object table...done.
+st80: Loading bitmaps: done.
+st80: Linking free chain...done.
+47144 free pointers
+Snapshot loaded.
+st80: unknown keysym ... ignored @ bytecode 388999
+st80: unknown keysym ... ignored @ bytecode 399999
+st80: unknown keysym ... ignored @ bytecode 585999
+st80: unknown keysym ... ignored @ bytecode 717999
+st80: unknown keysym ... ignored @ bytecode 738999
+strange BitBlt: oop=00004b85 w=0, h=13, bc_count=2950476
+strange BitBlt: oop=00004b86 w=0, h=13, bc_count=2967691
+strange BitBlt: oop=00004c1f w=0, h=13, bc_count=3182239
+strange BitBlt: oop=00004c3f w=0, h=13, bc_count=3359333
+strange BitBlt: oop=00003947 w=0, h=13, bc_count=4016737
+strange BitBlt: oop=00004d0d w=0, h=13, bc_count=4018241
+strange BitBlt: oop=00003946 w=0, h=13, bc_count=4239594
+strange BitBlt: oop=00003947 w=0, h=13, bc_count=4456903
+strange BitBlt: oop=00004d50 w=0, h=13, bc_count=4636742
+strange BitBlt: oop=000049ed w=0, h=13, bc_count=5458473
+strange BitBlt: oop=00004e80 w=0, h=13, bc_count=5579564
+st80: unknown keysym ... ignored @ bytecode 6485999
+st80: unknown keysym ... ignored @ bytecode 6493999
+st80: unknown keysym ... ignored @ bytecode 7093999
+st80: unknown keysym ... ignored @ bytecode 7100999
+st80: unknown keysym ... ignored @ bytecode 7143999
+st80: unknown keysym ... ignored @ bytecode 7155999
+strange BitBlt: oop=000049ba w=0, h=13, bc_count=7550181
+strange BitBlt: oop=0000513e w=0, h=13, bc_count=7552198
+strange BitBlt: oop=000049ba w=0, h=13, bc_count=8186272
+Snapshot invoked after 8513615 bytecodes executed
+collecting garbage, 346617 words free
+marking from 0009
+marking from 4fdc
+st80: rectifying counts @ bytecode 8513615
+collection complete, 369947 words left
+st80: compacting @ bytecode 8513615
+st80: Phase 1 complete @ bytecode 8513615
+st80: Phase 2 complete @ bytecode 8513615
+compaction complete, 369947 words left
+st80: Writing snapshot...154341 words in the object space
+Object table has 20888 entries
+bitmaps begin at offset 910416
+bitmaps end at offset 920922
+object table begins at offset 617984
+images/X.image renamed to images/X.image.bak, new images/X.image created
+Snapshot written.
+Yet another Smalltalk session comes to a successful conclusion ...
+st80: Exiting @ bytecode 8513626

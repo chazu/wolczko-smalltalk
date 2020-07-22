@@ -1,0 +1,21 @@
+154341 words in the object space
+st80: Loading object space...done.
+Object table begins at offset 617984
+st80: Loading object table...done.
+st80: Loading bitmaps: done.
+st80: Linking free chain...done.
+47018 free pointers
+Snapshot loaded.
+st80: unknown keysym ... ignored @ bytecode 23650999
+st80: unknown keysym ... ignored @ bytecode 27930999
+st80: unknown keysym ... ignored @ bytecode 28213999
+st80: unknown keysym ... ignored @ bytecode 32893999
+st80: unknown keysym ... ignored @ bytecode 80171999
+st80: unknown keysym ... ignored @ bytecode 83425999
+st80: unknown keysym ... ignored @ bytecode 98381999
+st80: unknown keysym ... ignored @ bytecode 101690999
+st80: unknown keysym ... ignored @ bytecode 114714999
+st80: unknown keysym ... ignored @ bytecode 116688999
+st80: unknown keysym ... ignored @ bytecode 116955999
+st80: unknown keysym ... ignored @ bytecode 119435999
+st80: Exiting @ bytecode 184809999

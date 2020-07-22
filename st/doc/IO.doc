@@ -1,0 +1,250 @@
+The External Interface of the I/O modules
+-----------------------------------------
+
+IO.[ch], and MachineIO.c are C modules for providing input events to
+an implementation of the Smalltalk Virtual Machine.  This note
+describes what they provide to the rest of the world, and what a new
+machine-dependent module must do.  The Smalltalk Virtual Machine and
+its associated event mechanism is described in Goldberg & Robson.
+
+IO.c requires an underlying UNIX implementation.  It uses UNIX-style
+system calls to read the time, and it provides an event logging and
+replay facility.  It should not need modification for particular UNIX
+machines.
+
+In addition, a machine-dependent file (such as XIO.c or SunIO.c)
+must be tailored for a specific machine's input mechanisms.
+This has already been done for X11, and Sun workstations with and
+without suntools.  A GenericIO module, which does only script replay,
+is also provided.
+
+The complete interface can be summarised as follows.
+
+IO.c
+----
+unsigned dispW, dispH;	/* height and width of the display */
+
+OOP inputSema=NIL_PTR;	/* the Smalltalk input semaphore */
+
+/* The following structures are used to record and playback
+   Smalltalk sessions.  To record a session, one should call
+   open_script_file() before commencing execution.  
+   To playback a session, call read_first_script_event() before
+   commencing execution.  (These are usually called in
+   IO_init().)Then, call read_script_event() at regular intervals to
+   process events.  The script file opened is defined by
+   script_file_name, which defaults to "st80.script".
+ */
+	/* whether input/output is real, or script-based */
+enum IO_mode { real_time, script_in, script_out };
+
+enum IO_mode io_mode;
+	/* for script recording and playback */
+char *script_file_name= "st80.script";
+
+short MouseX, MouseY;
+	/* Mouse co-ordinates as reported to the VM */
+
+typedef unsigned TIME;
+
+TIME SampleInterval=0;	/* the minimum number of milliseconds 
+			   between events reported to the VM. */
+
+/* open the script file and read the first event */
+void read_first_script_event()
+
+/* open the script file for writing */
+void open_script_file()
+
+/* Process the next scripted event and read another.
+   Switch to real-time input if there aren't any more. */
+void read_script_event()
+
+void addEvent(e)              /* add an event to the event buffer */
+EVENT e;
+
+EVENT nextEvent()                /* return event at head of buffer */
+
+typedef <16-bit unsigned> WORD;
+
+typedef unsigned BOOL;
+
+BOOL isEmptyEventQ()	/* Returns 1 if there are no events in the 
+			   queue.  Calling nextEvent() when 
+			   isEmptyEventQ() is true is an error. */
+
+TIME getTime()          /* return the value of the millisecond clock */
+
+TIME absTime()		/* returns the time in seconds, measured 
+			   from Jan 1, 1901, 00:00 */
+
+void do_time(t)		/* process t and add the requisite time events
+TIME t;			   to the event queue */
+
+Some of these functions are called from the I/O interface to the
+primitives, others from the machine-dependent module.  See the
+existing modules for examples.
+
+
+IO.h
+----
+The code in this file should be self-explanatory.
+
+
+Machine-dependent code
+----------------------
+
+The following routines must be provided by the machine-dependent module.
+
+
+void IO_init()
+/* Called once before doing any input.  Should place devices in
+   sensible states for emulation to begin.  Also reads the first event
+   from the script_file (using read_first_script_event()) if
+   io_mode==script_in, or opens the script file (using
+   open_script_file) if io_mode==script_out.  Sets the values of dispW
+   and dispH appropriate to the display/window being used.  Positions
+   the cursor at (0,0).  Sets up any signal handlers required to
+   ensure clean termination (which must call IO_exit()).
+*/
+
+void IO_exit()	
+/* Places devices in a clean state, closes the script file if open, and 
+   exits the program. */
+
+void input_enabled(en)
+BOOL en;
+/* This is called with TRUE or FALSE when the VM requires or does not
+   require any more input (ie when prInputSemaphore: is called) .  A
+   machine-dependent module may use it to save process input events
+   which will just be discarded.  It will be called at least once with
+   a value of TRUE, sometime after execution of bytecodes has
+   commenced.
+*/
+
+void doInput()	
+/* The main input routine.  When this is called, it should look at the
+   state of the input devices, and signal events to VM as necessary,
+   by calling do_time() and addEvent().  addEvent() will save events
+   to the script file if recording is enabled (io_mode==script_out).
+   If playback is on (io_mode==script_in), it should take events from
+   the script_file (using read_script_event()), ignoring the real
+   input devices.  If inputSema==NIL_PTR, this function should be a
+   no-op.
+
+   Additionally: MouseX and MouseY should be updated if necessary, and
+   if the mouse and cursor are linked the cursor position should be
+   updated (not in playback mode) to reflect the change in mouse
+   position.  doInput() should maintain the interval, in milliseconds,
+   between successive mouse motion events, and ignore any that happen
+   within the interval defined by SampleInterval.  Events should be
+   reported in keeping with the definition in the Blue Book.  Pay
+   particular attention to reporting shift and control key events, and
+   the correct case of character when the shift key is depressed.
+*/
+
+void moveCursor(x, y)
+int x, y;
+/* Places the cursor at (x,y).  If the cursor and mouse are linked
+   also updates MouseX and MouseY to x, y. */
+			
+newCursor(cursor)
+BITMAP cursor;
+/* Assigns the pattern in cursor to the h/w cursor.
+*/
+
+setLinked(l)
+BOOL l;			/* l !=0 links the cursor and mouse, l==0
+			   unlinks them. */
+
+void load_bitmaps(image)
+FILE *image;
+/* Should load the bitmaps in the image into memory, using the
+   machine-dependent format.  The offset in the image of each bitmap
+   object is given by an integer in the loctni field of the object
+   table.   If this function cannot load a bitmap, it should exit the
+   program with a fatal error.
+*/
+
+BOOL save_bitmaps(image, object_table_locs)
+FILE *image;
+unsigned *object_table_locs;
+/* Should write all the bitmaps in the object table to the file
+   pointer at by image (which is already open in write mode when
+   called).  For each bitmap written, the offset of the bitmap in the
+   file (obtained with ftell) should be placed in the corresponding
+   location in object_table_locs[] (ie, indexing this array with the
+   oop of the object).
+   If writing all the bitmaps is successfully performed, the function
+   should return FALSE, otherwise TRUE.
+*/
+
+
+BITMAP convert_bm(bm, w, h)
+OOP bm;
+WORD w, h;
+/* Should convert the Smalltalk WordArray with OOP bm to the
+   machine-dependent bitmap format.  The Form is of width w and height
+   h.  It should return a pointer the new bitmap.
+*/
+
+void re_start_window_input()
+/* This is called when an input script file is exhausted, and
+   the usual user input should be enabled.
+*/
+
+
+Other notes
+-----------
+
+The conventional sequence of calls to these module is:
+	IO_init();
+then, every 500 bytecodes (say),
+	doInput();
+which will in turn call addEvent() and do_time() for each event.
+Then the code for <InputState primInputWord> (prim.95) can
+use isEmptyEventQ() and nextEvent() to empty the event
+queue.
+
+<InputSensor primMousePt> (prim.90) accesses MouseX and MouseY to
+determine the position of the mouse.
+
+<InputState primCursorLocPut:> (prim.91) calls moveCursor().
+
+<Cursor class cursorLink:> (prim.92) calls setLinked().
+
+<InputState primInputSemaphore:> (prim.93) calls input_enabled() and
+   sets inputSema.
+
+<InputState primSampleInterval:> (prim.94) sets SampleInterval.
+
+<Time class secondClockInto:> (prim.98) uses absTime(), while <Time
+class millisecondClockInto:> (prim.99) uses getTime().  getTime() is
+also used to check whether a semaphore indicated by
+<ProcessorScheduler signal:atMilliseconds:> (prim. 100) should be
+signalled.
+
+<Cursor beCursor> (prim.101) uses newCursor().
+
+
+Omissions
+ ---------
+
+There is no mention of <BitBlt copyBits> (prim. 96),
+<DisplayScreen beDisplay> (prim.102) or any of the optional
+output primitives (103, 104).  Experience has shown that
+these are rather dependent on the implementation of the
+object memory, and independent of the rest of IO.c, so they
+have been placed in different modules.
+
+However, for the record, here is the header for BitBlt().
+The parameters are as per the Blue Book.
+
+BitBlt(destBits, srcBits, htBits, combRule, dx, dy, w, h,
+	clipX, clipY, clipW, clipH, sx, sy, sw, sh, dw, dh)
+unsigned sw, sh, dw, dh;
+WORD *destBits, *srcBits, *htBits;
+
+Mario Wolczko
+9/6/89
+

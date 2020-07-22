@@ -1,0 +1,24 @@
+bootstrapping
+-------------
+In InputSensor class>initialize change 21 to 95, change ~ to ^ on last
+line buit one in browser (shift 6), add (256 $` (126)) after (256 $. '?>')
+
+
+
+Then do:
+InputSensor initialize.
+Sensor initMap.  
+InputSensor install
+
+That fixes _.
+
+Now add a link to the boot primitive to read a file:
+
+In String class
+bootPrimitive
+	<primitive: 255>
+	self primitiveFailed
+
+then:
+(ReadWriteStream with: 'FileSys.st' bootPrimitive) reset ; fileIn
+

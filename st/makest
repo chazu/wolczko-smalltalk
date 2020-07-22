@@ -1,0 +1,72 @@
+#!/bin/sh
+BIG=false
+ST80=st80
+
+while true
+do
+	case $1 in
+	-lint)	CC=lint ; export CC ; TARGET=lint;;
+	-X)	DMACHINE="-DX11"
+		ST80="$ST80.X"
+		BITBLT=XBitBlt
+		IO=XIO
+		LIBES="$LIBES -lX11" ;;
+	-svr4)	LIBES="$LIBES -L/usr/ucblib -lucb -lnsl -lsocket"
+		CFLAGS="$CFLAGS -g -idirafter /usr/ucbinclude"
+		CC=gcc ; export CC
+		ST80=$ST80.svr4 ;;
+#	-sun)	echo Probably not wise to try -sun..
+#		DMACHINE="-DSUN=3 -DSUNTOOLS"
+#		ST80="$ST80.suntools"
+#		BITBLT=SunBitBlt
+#		IO=SunIO
+#		LIBES="-lsuntool -lsunwindow -lpixrect" ;;
+#	-sunraw)echo Probably not wise to try -sunraw..
+#		DMACHINE="-DSUN=3"
+#		ST80="$ST80.sunraw"
+#		BITBLT=SunBitBlt
+#		IO=SunRawIO
+#		LIBES="-lsuntool -lsunwindow -lpixrect" ;;
+	-generic)
+		ST80="$ST80.sim"
+		DMACHINE="-DGENERIC"
+		BITBLT=GenericBitBlt
+		IO=GenericIO
+		CFLAGS="${CFLAGS} -DSIM"
+		;;
+	-sim)	ST80=${ST80}.sim CFLAGS="${CFLAGS} -DSIM -DSINGLE_STEP" ;;
+	-big) 	CFLAGS="${CFLAGS} '-DOM_SIZE=(1024*1024)' '-DOT_SIZE=(128*1024)'"
+		BIG=true ST80=${ST80}.big ;;
+	-small) BIG=false ;;
+	-clean)	make clean ; exit 0 ;;
+	-*) 	FLAGS="$FLAGS $1" ;;
+	*)	break;;
+	esac
+	shift
+done
+
+ST80="$ST80.`arch`"
+
+SIZE_OBJS="OM.o Snapshot.o" # recompile these if you change OM_SIZE or OT_SIZE
+
+if $BIG 
+then if [ -f .small ]
+     then
+	echo removing obsolete .o files
+	sleep 5
+	rm -f .small $SIZE_OBJS
+     fi
+     touch .big
+else if [ -f .big ]
+     then
+	echo removing obsolete .o files
+	sleep 5
+	rm -f .big $SIZE_OBJS
+     fi
+     touch .small
+fi
+
+CFLAGS="$DMACHINE $CFLAGS"
+
+set -x
+make CFLAGS="$CFLAGS" BITBLT="$BITBLT" IO="$IO" ST80=$ST80 LIBES="$LIBES" $FLAGS $@ $TARGET

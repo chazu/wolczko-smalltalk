@@ -1,0 +1,29 @@
+154341 words in the object space
+st80: Loading object space...done.
+Object table begins at offset 617984
+st80: Loading object table...done.
+st80: Loading bitmaps: done.
+st80: Linking free chain...done.
+112554 free pointers
+Snapshot loaded.
+strange BitBlt: oop=000050cd w=0, h=13, bc_count=234002
+strange BitBlt: oop=000018c3 w=0, h=13, bc_count=374897
+Snapshot invoked after 19597635 bytecodes executed
+collecting garbage, 278116 words free
+marking from 0009
+marking from d95e
+st80: rectifying counts @ bytecode 19597635
+collection complete, 890769 words left
+st80: compacting @ bytecode 19597635
+st80: Phase 1 complete @ bytecode 19597635
+st80: Phase 2 complete @ bytecode 19597635
+compaction complete, 890769 words left
+st80: Writing snapshot...157807 words in the object space
+Object table has 56298 entries
+bitmaps begin at offset 1419980
+bitmaps end at offset 1469620
+object table begins at offset 631808
+images/X.image renamed to images/X.image.bak, new images/X.image created
+Snapshot written.
+Yet another Smalltalk session comes to a successful conclusion ...
+st80: Exiting @ bytecode 19597646

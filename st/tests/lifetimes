@@ -1,0 +1,44 @@
+#!/usr/common/bin/perl
+
+#measure lifetimes of objects, moment of last access
+
+$count= 0;
+while(read(STDIN, $record, 9)==9)	{
+	($bytecodetype, $oop, $offset) = unpack("CLL",$record);
+
+	if ($bytecodetype eq ord('c')) {
+		$created{$oop}= $count;
+	} else {if ($bytecodetype == ord('d')) {
+		if (defined($created{$oop})) {
+			print "$created{$oop} $count $lastaccess{$oop}\n";
+		}
+	} else {if ($bytecodetype == ord('r') || $bytecodetype == ord('w')) {
+		$lastaccess{$oop}= $count;
+	} else { die "Bad bytecodetype $bytecodetype"; }}}
+	$count++;
+}
+
+exit;
+
+ if ($? != 0)
+	{
+	die "failed to read record of length $messagerecordlength, got $?";
+	}
+
+#we have got to the end - print out the results
+
+
+print "Count of the number of arguments per message receive.\n";
+print "no args \t count\n";
+
+$total=0;
+for $key (0 .. $#counts)
+	{
+	print "$key\t$counts[$key]\n";
+	$total+=$counts[$key];
+	}
+
+
+print"Total of counts should equal total number of messages for this
+trace.\n";
+print"Count Total = $total actual = $messages\n";

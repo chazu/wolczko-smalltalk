@@ -1,0 +1,9 @@
+xerox.image  ----bootx.script--> X.image (needs FileSys.st)
+X.image ---windows.script--> windows.image (needs windows.st)
+
+OLD, DO NOT USE:
+xerox.image  ----boot.script---> start.image (needs FileSys.st)
+start.image ----windows.script---> windows.image
+windows.image ----demo.script ---> demo.image
+start.image ----future.script---> none
+start.image ----file-in-pcb.script---> pcb.image

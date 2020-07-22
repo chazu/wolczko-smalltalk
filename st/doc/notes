@@ -1,0 +1,7 @@
+compiling on Titan
+
+flags: -43 -O2 -inline -vector_c -vreport
+	XIO.c IO.c: compiler bombs out!
+	removing vector options fixes it.
+
+

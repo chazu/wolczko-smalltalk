@@ -1,0 +1,1 @@
+"assuming we have a boot primitive, should be able to file this inusing	(ReadWriteStream with: 'FileSys.st' bootPrimitive) reset ; fileIn(assuming this file is called FileSys.st)."'From Gnuemacs, on Mar 3, 1987 at approx. 20:30'!!String methodsFor: 'fileIn/Out'!fileIn	(ReadWriteStream with: self bootPrimitive) reset ; fileIn!

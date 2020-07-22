@@ -1,0 +1,309 @@
+.TH st80 1 "4 Sep 1987"
+.SH NAME
+st80.sim - 32-bit Smalltalk-80 virtual machine simulator
+.SH SYNOPSIS
+.B st80.sim
+[-g] [-r] [-d] [-i image-file] [-s script-file] [-T tracing-options]
+.br
+.B st80
+[-r] [-w] [-i image-file] [-s script-file]
+
+.SH DESCRIPTION
+.I st80.sim
+is a 32-bit Smalltalk Virtual Machine Simulator, capable of generating
+simulation data.
+.I st80
+is a Smalltalk Virtual Machine, capable of generating input scripts for
+.I st80.sim.
+Apart from being 32-bit machines, both are "Blue Book"
+implementations. 
+The normal mode of operation is to use 
+.I st80
+in interactive mode to
+generate a script for simulation purposes, using the \-w and \-s
+options.  This can then be played into
+.I st80.sim
+using the \-r and \-s options, and a selection of trace information
+can be culled using the \-T and \-m options.  
+.I st80.sim
+is driven by simple commands from the standard input.
+.I st80
+must be run under X11, as it requires graphic input and output.
+
+Trace data is written to standard output, error and informational
+messages to standard error.
+.I st80
+creates a screen-sized window for its graphic input and output, which
+may be iconified.  The image file is a local format, incompatible with
+other image formats.
+
+.SH COMMON OPTIONS
+.IP -r
+Drive the virtual machine from an input script file.  The name of the
+file can be given with the \-s option, the default being 
+.I st80.script.
+.IP -i\ image-file
+Take 
+.I image-file
+as the starting image.  If not specified the image file name is
+.I st80.image.  
+When a snapshot is written, the image file is renamed
+with a
+.I .bak
+extension, and the new image is written to the old name.
+.IP -s\ script-file
+alter the name of the script file for use in conjunction with the -r
+and -w options.
+
+.SH st80 OPTIONS
+.IP -w
+Write a trace of the input events of the next session to an input
+script file.  The name of the file can be given with the \-s option,
+the default being 
+.I st80.script.
+This script can be used as input to a later run of either
+.I st80
+or
+.I st80.sim
+using the \-r option.
+.IP -t\ log-file
+`Interesting' things that happen during execution (such as when a
+message is not understood, or when the compacter is invoked) are
+written to a log file that is called 
+.I st80.trace 
+by default.  This
+option selects a different name.
+
+
+.SH st80.sim OPTIONS
+
+.IP -d
+Disable the creation of an
+.I X11
+window.  For debugging, this window can be used to monitor the
+progress of the simulation, but when simulating for real this window
+occupies precious memory space, and also requires
+.I X11
+to be running, so is not used.
+.IP -g
+Simulate a static grouping of objects in the initial image when
+outputting initialisation data.
+.IP -T\ tracing-options
+When generating trace data,
+.I st80.sim
+writes 9-byte records consisting of an identification character for
+the record, and two 4-byte data words in
+.I getw(3)
+format.  The first word is the oop of an object, the second is a size
+or offset.  Sizes are in bytes, offsets in words.
+The list of characters in
+.I tracing-options
+selects which type of data
+is written.
+The available choice is:
+.IP r 10
+reading a memory word
+.IP w 10 
+writing a memory word
+.IP c 10
+creating an object
+.IP d 10
+garbage collecting (deleting an object)
+.IP i 10
+Initialising an object.  Before any computation takes place, all
+objects in the image are scanned, and the oop and size of each object
+is output in an 'i' record.  This scanning takes place in oop-order,
+unless the -g option is used, in which case a depth-first scan is
+done.
+.IP f 10
+End of initialisation.  The oop and offset are both 0.
+.IP x 10
+Bytecode fetch.  These are not included in the 'r' data.
+.IP X 10
+Instruction count.  The first word is a count of instructions executed
+(remember an instruction can be more than one byte long), the second
+word is 0.
+.IP k 10
+Class.  The first word is the oop of an object being created or
+initialiased, the second word is its class.
+.PP
+If the oop in question (being created, deleted, written, read or
+initialised) is a method context, the character is converted to
+upper-case.   Thus if one wanted to selected creation and deletion of
+all objects, together with reads and writes to method contexts, and
+instruction fetches, the selection string would be "cCdDRWx".
+
+.PP
+There are a number of additional selections that output data in
+different formats:
+
+.IP j 5
+outputs jump data.  This
+differs in format from the other options in that it is followed by 5
+fields:
+.IP bytecode 10
+a 1 byte field indicating which bytecode was executed
+.IP taken 10
+a 1 byte field indicating whether the jump was taken or not.  1
+indicates taken, 0 indicates not taken
+.IP method 10
+the oop of the current compiled method
+.IP offset 10
+the IP of the jump bytecode (measured in bytes from 0)
+.IP destination 10
+the offset (positive or negative) of the jump.
+.PP
+.IP m 5
+causes a trace of message sends to be output.
+The format is, after an 'm' byte:
+.IP bytecode 10
+a 1 byte field indicating which bytecode was executed
+.IP class 10
+the oop of the class of the receiver of the message
+.IP selector 10
+the oop of the selector of the message
+.IP method 10
+the oop of the method from which the message is being sent
+.IP context 10
+the oop of the context from which the message is being sent
+.IP offset 10
+the IP of the send bytecode (indexed from 0)
+.IP receiver 10
+the oop of the receiver of the message.
+.IP old-receiver 10
+the oop of the current receiver.
+.IP argcount 10
+how many arguments the new method takes (1 byte), and
+.IP tempcount 10
+how many temporaries it uses (1 byte).
+
+.PP
+.IP a 5
+causes an additional trace of message sends to be output.
+The format is, after an 'a' byte:
+.IP argcount 10
+how many arguments the new method takes (1 byte), and
+.IP old-receiver-class 10
+The class of the old receiver.
+.IP classes of receiver and arguments 10
+the oop of the class of the receiver of the message, the oop of the
+class of the first argument, etc. (argcount+1 words)
+
+.PP
+.IP b 5
+outputs a trace of block evaluations:
+.IP method 10
+the oop of the method from which the block is being evaluated
+.IP context 10
+the oop of the context from which the block is evaluated
+.IP offset 10
+the IP of the current bytecode (indexed from 0)
+.IP receiver 10
+the oop of the block context being evaluated
+.IP argcount 10
+how many arguments the block takes (1 byte).
+
+.IP M 5
+outputs a trace of returns from contexts:
+.IP bytecode 10
+a 1 byte field indicating which bytecode was executed
+.IP method 10
+the oop of the method which is returning
+.IP context 10
+the oop of the context being returned from
+.IP offset 10
+the IP of the return bytecode (indexed from 0)
+
+.IP n 5
+outputs the class of the result returned from a context, and a boolean
+word (1 for true, 0 for false) whether the result was the same oop as
+self. 
+
+.IP B 5
+outputs a trace of the receiver of a context returned to, and the
+class of the receiver (both oops).
+
+.IP p 5
+outputs the oop of the new process whenever a process switch occurs,
+and the oop of the context before process switching.  Don't forget
+that you get an initial datum at the start of execution for the
+initial process.
+
+.IP l 5
+is output when full message lookup is
+about to begin (i.e. the method cache has missed).  The first argument
+is the class in which the method lookup begins; the second is the
+class of the receiver (which need not be the same; think of super).
+
+.IP L 5
+is output when method lookup has ended.  The first argument is the oop
+of the method found, the second is the oop of the receiver.
+
+.PP
+When running
+.I st80.sim
+you can single step the Virtual Machine and inspect internal state
+using a software "front panel".  The commands available are:
+.IP a
+print oops and addresses of active and home contexts
+.IP A
+print a dump of the active context in symbolic form.  A pointer
+indicates the location of the top of stack, and all objects have their
+class printed.  Additionally, integers have their value printed.
+.IP c
+print other ``interesting'' registers: the oop of the input semaphore,
+the core and oops limits, and how much core and how many oops are
+left, and the limit semaphore.
+.IP d
+print a back-trace of methods on the current stack.  Methods are
+printed in the form
+.I <class-of-method> method-selector.
+.IP f
+print the oops and addresses of chunks on the free lists.  The free
+lists are ordered by size.
+.IP g
+Run the mark/sweep garbage collector, followed by the compacter.  Due
+to internal cached state, the VM should 
+.I not
+be resumed after invoking a garbage collection.
+.IP h
+print a summary of available commands
+.IP i\ oop
+inspect the contents of an object with oop
+.I oop.
+The oop should be in hexadecimal.  Output data consists of: the oop;
+on the next line: the reference count (lsb is a sticky bit), whether
+the object is a pointer or word object, whether the object is a
+bitmap, and the address of the object; on the next line, the size of
+the object (in bytes) and its class oop, and the name of the class (if
+known).  Then each word of the object follows, one to a line.  For
+large objects this listing stops after 100 words.
+.IP I\ oop
+the same as -i, but will not stop printing after 100 words.
+.IP p\ n
+print the first
+.I n
+oops on the free pointer chain
+.IP Q
+quit the VM
+.IP r
+print the "registers" of the VM
+.IP x\ n
+execute
+.I n
+bytecodes.
+
+.SH BUGS
+No file system interface is implemented.  A "boot" primitive (255) can
+be used to read the entire contents of a file into a string.
+.PP
+It's horrendously slow!
+
+.SH AUTHOR
+Mario Wolczko
+.PP
+Ifor Williams demanded most of the simulation options.
+.PP
+Michael Fisher demanded speed, but was disappointed.
+.PP
+Rhodri Davies demanded correctness; he's like that.

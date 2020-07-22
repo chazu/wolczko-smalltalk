@@ -1,0 +1,448 @@
+000C	SmallInteger
+000E	String
+0010	Array
+0014	Float
+0016	MethodContext
+0018	BlockContext
+001A	Point
+001C	LargePositiveInteger
+001E	DisplayBitmap
+0020	Message
+0022	CompiledMethod
+0026	Semaphore
+0028	Character
+0038	Symbol
+003A	Symbol class
+003C	Metaclass
+003E	Metaclass class
+0040	ClassDescription class
+0042	Behavior class
+0044	Object class
+0046	Class
+0048	Class class
+004C	MethodDictionary
+004E	MethodDictionary class
+0050	IdentityDictionary class
+0052	Dictionary class
+0054	Set class
+0056	Collection class
+0070	ClassOrganizer
+0072	ClassOrganizer class
+0084	Association
+0086	Association class
+0088	LookupKey class
+008A	Magnitude class
+009A	Magnitude
+009C	Object
+0148	WriteStream
+014A	WriteStream class
+014C	PositionableStream class
+014E	Stream class
+0162	Stream
+0186	OrderedCollection
+0188	OrderedCollection class
+018A	SequenceableCollection class
+0198	SequenceableCollection
+019A	Collection
+0218	SortedCollection
+021A	SortedCollection class
+0276	RemoteString
+0278	RemoteString class
+02B0	FileStream
+02B2	FileStream class
+02B4	ExternalStream class
+02B6	ReadWriteStream class
+02C2	ReadWriteStream
+02E8	Cursor
+02EA	Cursor class
+02EC	Form class
+02EE	DisplayMedium class
+02F0	DisplayObject class
+02FE	DisplayObject
+0342	DisplayScreen
+0344	DisplayScreen class
+0374	ControlManager
+0376	ControlManager class
+03D4	NotifierView
+03D6	NotifierView class
+03D8	StandardSystemView class
+03DA	View class
+03EE	WindowingTransformation
+03F0	WindowingTransformation class
+047A	Dictionary
+047C	Set
+04C0	IdentitySet
+04C2	IdentitySet class
+0556	Bag
+0558	Bag class
+05D0	InspectorView
+05D2	InspectorView class
+05EE	SelectionInListView
+05F0	SelectionInListView class
+05F2	ListView class
+0600	ListView
+0602	View
+06E0	Controller
+06E2	Controller class
+072E	InputSensor
+0730	InputSensor class
+0740	InputState
+0742	InputState class
+07A4	Process
+07A6	Process class
+07A8	Link class
+07BA	Link
+0864	SharedQueue
+0866	SharedQueue class
+08CE	KeyboardEvent
+08D0	KeyboardEvent class
+0A72	WordArray
+0A74	WordArray class
+0A76	ArrayedCollection class
+0A94	ArrayedCollection
+0AB8	Text
+0ABA	Text class
+0AD4	FillInTheBlank
+0AD6	FillInTheBlank class
+0AD8	StringHolder class
+0AEE	StringHolder
+0B16	ChangeList
+0B18	ChangeList class
+0B94	BrowserView
+0B96	BrowserView class
+0BB4	Browser
+0BB6	Browser class
+0BD0	ActionMenu
+0BD2	ActionMenu class
+0BD4	PopUpMenu class
+0BE8	TextStyle
+0BEA	TextStyle class
+0BFE	StrikeFont
+0C00	StrikeFont class
+0C52	Form
+0C54	DisplayMedium
+0CB0	Rectangle
+0CB2	Rectangle class
+0D9E	Quadrangle
+0DA0	Quadrangle class
+0E12	CharacterBlock
+0E14	CharacterBlock class
+1154	BitBlt
+1156	BitBlt class
+1170	Path
+1172	Path class
+11E0	Spline
+11E2	Spline class
+1210	Line
+1212	Line class
+127A	LinearFit
+127C	LinearFit class
+12A4	Curve
+12A6	Curve class
+12D4	Arc
+12D6	Arc class
+1326	Circle
+1328	Circle class
+13F4	CharacterScanner
+13F6	CharacterScanner class
+1438	CompositionScanner
+143A	CompositionScanner class
+146C	TextLineInterval
+146E	TextLineInterval class
+1470	Interval class
+148E	Interval
+155A	DisplayScanner
+155C	DisplayScanner class
+15BC	CharacterBlockScanner
+15BE	CharacterBlockScanner class
+1642	Pen
+1644	Pen class
+1720	BitEditor
+1722	BitEditor class
+1724	MouseMenuController class
+1730	MouseMenuController
+1768	StandardSystemController
+176A	StandardSystemController class
+177A	PopUpMenu
+17CC	Paragraph
+17CE	Paragraph class
+17D0	DisplayText class
+17F2	DisplayText
+1980	Delay
+1982	Delay class
+19F8	TextCollector
+19FA	TextCollector class
+1A6C	RunArray
+1A6E	RunArray class
+1AC6	AltoFileAddressArray
+1AC8	AltoFileAddressArray class
+1B22	Time
+1B24	Time class
+1B4C	ByteArray
+1B4E	ByteArray class
+1BB8	Date
+1BBA	Date class
+1C3E	Integer
+1C40	Integer class
+1C42	Number class
+1C5E	Number
+1D16	Fraction
+1D18	Fraction class
+1DA0	LargeNegativeInteger
+1DA2	LargeNegativeInteger class
+2046	TextList
+2048	TextList class
+21A2	NotifierController
+21A4	NotifierController class
+220A	Debugger
+220C	Debugger class
+2230	CodeView
+2232	CodeView class
+2234	TextView class
+2246	TextView
+227E	TextController
+2280	TextController class
+2282	ParagraphEditor class
+2284	ScrollController class
+2292	ScrollController
+22F8	ParagraphEditor
+23DE	ReadStream
+23E0	ReadStream class
+23F0	PositionableStream
+24E0	StringHolderController
+24E2	StringHolderController class
+256A	ProjectController
+256C	ProjectController class
+25D4	TextCollectorController
+25D6	TextCollectorController class
+2602	ChangeController
+2604	ChangeController class
+2626	FillInTheBlankController
+2628	FillInTheBlankController class
+2650	CRFillInTheBlankController
+2652	CRFillInTheBlankController class
+26BE	ListController
+26C0	ListController class
+26F8	SelectionInListController
+26FA	SelectionInListController class
+2722	LockedListController
+2724	LockedListController class
+2746	ChangeListController
+2748	ChangeListController class
+27B0	ChangeListView
+27B2	ChangeListView class
+27C8	SwitchView
+27CA	SwitchView class
+2804	SwitchController
+2806	SwitchController class
+283C	LockedSwitchController
+283E	LockedSwitchController class
+2860	IndicatorOnSwitchController
+2862	IndicatorOnSwitchController class
+28CA	BooleanView
+28CC	BooleanView class
+2922	StandardSystemView
+29DE	StringHolderView
+29E0	StringHolderView class
+2A42	TextCollectorView
+2A44	TextCollectorView class
+2A74	FillInTheBlankView
+2A76	FillInTheBlankView class
+2A90	DisplayTextView
+2A92	DisplayTextView class
+2AAE	NoController
+2AB0	NoController class
+2B3A	BinaryChoiceController
+2B3C	BinaryChoiceController class
+2B80	ProjectView
+2B82	ProjectView class
+2B8E	Project
+2B90	Project class
+2BA4	ChangeSet
+2BA6	ChangeSet class
+2C04	SystemOrganizer
+2C06	SystemOrganizer class
+2C36	AltoFileDirectory
+2C38	AltoFileDirectory class
+2C3A	FileDirectory class
+2C70	FileDirectory
+2E0A	AltoFile
+2E0C	AltoFile class
+2E0E	File class
+2E24	File
+2F66	ExternalStream
+300C	AltoFilePage
+300E	AltoFilePage class
+3010	FilePage class
+3020	FilePage
+3330	IdentityDictionary
+337A	Scanner
+337C	Scanner class
+3428	Parser
+342A	Parser class
+34AC	MethodNode
+34AE	MethodNode class
+34B0	ParseNode class
+3540	ParseNode
+359A	ReturnNode
+359C	ReturnNode class
+35C8	VariableNode
+35CA	VariableNode class
+35CC	LeafNode class
+35DA	LeafNode
+360E	LiteralNode
+3610	LiteralNode class
+3636	SelectorNode
+3638	SelectorNode class
+3682	Encoder
+3684	Encoder class
+36F2	MessageNode
+36F4	MessageNode class
+3774	BlockNode
+3776	BlockNode class
+37C4	ParseStack
+37C6	ParseStack class
+3952	LiteralDictionary
+3954	LiteralDictionary class
+3AFE	AssignmentNode
+3B00	AssignmentNode class
+3B3E	CascadeNode
+3B40	CascadeNode class
+3B6E	DecompilerConstructor
+3B70	DecompilerConstructor class
+3D18	ChangeScanner
+3D1A	ChangeScanner class
+3D4E	MethodOtherChange
+3D50	MethodOtherChange class
+3D52	MethodChange class
+3D54	ClassRelatedChange class
+3D56	Change class
+3D6A	Change
+3D84	Compiler
+3D86	Compiler class
+3DCE	SyntaxError
+3DD0	SyntaxError class
+3DDE	ProcessHandle
+3DE0	ProcessHandle class
+3EEC	ClassRelatedChange
+3F06	ClassChange
+3F08	ClassChange class
+3F1C	ClassDefinitionChange
+3F1E	ClassDefinitionChange class
+3F52	ClassOtherChange
+3F54	ClassOtherChange class
+3F78	ClassCommentChange
+3F7A	ClassCommentChange class
+3FBE	MethodChange
+3FD2	MethodDefinitionChange
+3FD4	MethodDefinitionChange class
+404E	OtherChange
+4050	OtherChange class
+4310	CodeController
+4312	CodeController class
+433E	Explainer
+4340	Explainer class
+4454	Behavior
+458C	MethodDescription
+458E	MethodDescription class
+4660	Decompiler
+4662	Decompiler class
+4664	InstructionStream class
+467E	InstructionStream
+46EE	ContextPart
+46F0	ContextPart class
+47FC	InstructionPrinter
+47FE	InstructionPrinter class
+49B6	ClassDescription
+4A6E	ClassCategoryReader
+4A70	ClassCategoryReader class
+4B7A	OnlyWhenSelectedCodeController
+4B7C	OnlyWhenSelectedCodeController class
+4B9C	AlwaysAcceptCodeController
+4B9E	AlwaysAcceptCodeController class
+4C10	OnlyWhenSelectedCodeView
+4C12	OnlyWhenSelectedCodeView class
+4CD6	MethodListBrowser
+4CD8	MethodListBrowser class
+4D26	Inspector
+4D28	Inspector class
+4DC2	DictionaryInspector
+4DC4	DictionaryInspector class
+4E40	ContextInspector
+4E42	ContextInspector class
+4EFC	ScreenController
+4EFE	ScreenController class
+4F60	FileList
+4F62	FileList class
+4F64	FileModel class
+4F84	FileModel
+5066	BinaryChoice
+5068	BinaryChoice class
+5080	BinaryChoiceView
+5082	BinaryChoiceView class
+516A	FormEditor
+516C	FormEditor class
+51C2	FormHolderView
+51C4	FormHolderView class
+51C6	FormView class
+51DA	FormView
+524A	FormMenuView
+524C	FormMenuView class
+52A6	FormButtonCache
+52A8	FormButtonCache class
+53EC	Switch
+53EE	Switch class
+543C	OneOnSwitch
+543E	OneOnSwitch class
+547A	Button
+547C	Button class
+54BE	FormMenuController
+54C0	FormMenuController class
+5682	OpaqueForm
+5684	OpaqueForm class
+5CCC	LookupKey
+61B6	SystemDictionary
+61B8	SystemDictionary class
+62CC	Random
+62CE	Random class
+630C	LinkedList
+630E	LinkedList class
+634A	MappedCollection
+634C	MappedCollection class
+639C	InfiniteForm
+639E	InfiniteForm class
+63CC	Boolean
+63CE	Boolean class
+6404	False
+6406	False class
+643A	True
+643C	True class
+6480	UndefinedObject
+6482	UndefinedObject class
+64B4	SystemTracer
+64B6	SystemTracer class
+65EA	MetaclassForMultipleInheritance
+65EC	MetaclassForMultipleInheritance class
+6626	ProcessorScheduler
+6628	ProcessorScheduler class
+66DE	Benchmark
+66E0	Benchmark class
+6926	MessageTally
+6928	MessageTally class
+6A20	Checker
+6A22	Checker class
+8652	String class
+87D0	SmallInteger class
+88E2	Array class
+8912	Float class
+8AA2	MethodContext class
+8ADE	BlockContext class
+8B42	Point class
+8BDC	LargePositiveInteger class
+8C3C	DisplayBitmap class
+8C56	Message class
+8C96	CompiledMethod class
+8D72	Semaphore class
+8DA6	Character class
+93B0	ImageStatistics class
+9670	ImageStatistics
